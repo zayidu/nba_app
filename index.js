@@ -9,7 +9,7 @@ import promiseMiddleware from 'redux-promise';
 
 import reducers from './app/store/reducers';
 
-const composeEnhancers = window._REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const createStoreWithMiddleware = createStore(
   reducers,

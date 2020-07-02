@@ -1,7 +1,7 @@
 # OSX
 #
 .DS_Store
-
+app/utils/misc.js
 # Xcode
 #
 build/

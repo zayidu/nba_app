@@ -10,6 +10,16 @@ import SignIn from './components/auth';
 import News from './components/news';
 import Games from './components/games';
 
+// AuthStack - SignIn
+const AuthStack = createStackNavigator(
+  {
+    SignIn,
+  },
+  {
+    headerMode: 'none',
+  },
+);
+
 // AppStack
 const Tab = createBottomTabNavigator();
 const AppStack = () => {
@@ -22,11 +32,6 @@ const AppStack = () => {
     </NavigationContainer>
   );
 };
-
-// AuthStack
-const AuthStack = createStackNavigator({
-  SignIn,
-});
 
 export const RootNavigator = () => {
   return createAppContainer(
