@@ -1,16 +1,78 @@
 import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {RootNavigator} from './routes';
+import {StyleSheet, View, AsyncStorage, ActivityIndicator} from 'react-native';
+// import AsyncStorage from '@react-native-community/async-storage';
+
+import {getTokens, setTokens} from './utils/misc';
+
+// Redux
+import {connect} from 'react-redux';
+import {autoSignIn} from './store/actions/user_actions';
+import {bindActionCreators} from 'redux';
+
+// Screens:
+import {RootNavigatorAuth} from './routes/routes_auth';
+// import {RootNavigatorPrivate} from './routes/routes_private';
+import {RootNavigatorPrivate} from './routes/routes_auth';
 
 class App extends Component {
-  render() {
-    const Nav = RootNavigator();
+  state = {
+    loading: true,
+    token: null,
+    User: '',
+  };
 
-    return (
-      <View style={styles.container}>
-        <Nav />
-      </View>
-    );
+  componentDidMount() {
+    getTokens(value => {
+      if (value[0][1] === null) {
+        this.setState({loading: false, token: '', User: ''});
+      } else {
+        this.props.autoSignIn(value[1][1]).then(() => {
+          if (!this.props.User.auth.token) {
+            this.setState({loading: false, token: '', User: ''});
+          } else {
+            this.setState({
+              loading: false,
+              token: this.props.User.auth.token,
+              User: this.props.User.auth,
+            });
+          }
+        });
+      }
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    let User = nextProps.User.auth;
+    console.log(User);
+    if (User) {
+      this.setState({
+        loading: false,
+        token: this.props.User.token,
+        User: this.props.User,
+      });
+    }
+  }
+
+  render() {
+    if (this.state.loading) {
+      return (
+        <View style={styles.loading}>
+          <ActivityIndicator />
+        </View>
+      );
+    } else if (this.props.User.auth && this.props.User.auth.token) {
+      return (
+        <View style={styles.container}>
+          <RootNavigatorPrivate />
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          <RootNavigatorAuth />
+        </View>
+      );
+    }
   }
 }
 
@@ -19,6 +81,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  loading: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
-export default App;
+const mapStateToProps = state => ({
+  User: state.User,
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({autoSignIn}, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);

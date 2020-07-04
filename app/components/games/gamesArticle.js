@@ -1,22 +1,21 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
-class NewsComponent extends Component {
+class GamesArticleComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>News</Text>
+        <Text>Games Article</Text>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
+  // container: {
+  //   flex: 1,
+  //   backgroundColor: '#fff',
+  // },
 });
 
-export default NewsComponent;
+export default GamesArticleComponent;

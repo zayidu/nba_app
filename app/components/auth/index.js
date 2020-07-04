@@ -19,11 +19,12 @@ import {bindActionCreators} from 'redux';
 
 class AuthComponent extends Component {
   state = {
-    loading: true,
+    loading: false,
   };
 
   goNext = () => {
-    this.props.navigation.navigate('App');
+    // this.props.navigation.navigate('App');
+    // this.props.navigation.navigate('AppScreens', {screen: 'News'});
   };
 
   componentDidMount() {
