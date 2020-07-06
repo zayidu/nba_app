@@ -77,7 +77,7 @@ target 'nba_app' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-
+  pod 'react-native-video', :path => '../node_modules/react-native-video/react-native-video.podspec'
 
 
   target 'nba_appTests' do
