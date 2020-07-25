@@ -138,7 +138,7 @@ class AuthForm extends Component {
     } else {
       setTokens(this.props.User.auth, () => {
         this.setState({hasErrors: false});
-        // this.props.goNext();
+        this.props.goNext();
       });
     }
   };

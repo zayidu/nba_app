@@ -10,6 +10,8 @@ import {autoSignIn} from './store/actions/user_actions';
 import {bindActionCreators} from 'redux';
 
 // Screens:
+import {RootNavigator} from './routes/routes_auth';
+
 import {RootNavigatorAuth} from './routes/routes_auth';
 // import {RootNavigatorPrivate} from './routes/routes_private';
 import {RootNavigatorPrivate} from './routes/routes_auth';
@@ -66,16 +68,24 @@ class App extends Component {
           <ActivityIndicator />
         </View>
       );
-    } else if (this.props.User.auth && this.props.User.auth.token) {
+    }
+    // else if (this.props.User.auth && this.props.User.auth.token) {
+    //   return (
+    //     <View style={styles.container}>
+    //       <RootNavigatorPrivate />
+    //     </View>
+    //   );
+    // } else {
+    //   return (
+    //     <View style={styles.container}>
+    //       <RootNavigatorAuth />
+    //     </View>
+    //   );
+    // }
+    else {
       return (
         <View style={styles.container}>
-          <RootNavigatorPrivate />
-        </View>
-      );
-    } else {
-      return (
-        <View style={styles.container}>
-          <RootNavigatorAuth />
+          <RootNavigator />
         </View>
       );
     }

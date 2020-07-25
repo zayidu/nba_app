@@ -1,4 +1,5 @@
 import React from 'react';
+import {Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -24,7 +25,12 @@ function AuthScreens() {
       <AuthStack.Screen
         name="Auth"
         component={SignIn}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          headerStyle: {
+            backgroundColor: '#001338',
+          },
+        }}
       />
     </AuthStack.Navigator>
   );
@@ -48,6 +54,8 @@ const headerConf = {
   // headerTitleStyle: {
   //   fontWeight: 'bold',
   // },
+  headerLeft: null,
+  // headerLeft: () => <Button title="Login" color="#fff" />,
 };
 
 // News Stack - Private
@@ -98,7 +106,7 @@ const AppScreens = () => {
       initialRouteName="News">
       <AppStackTab.Screen
         name="News"
-        component={NewsScreens}
+        children={NewsScreens}
         options={{
           tabBarIcon: ({focused}) => {
             let tintColor = '#fff';
@@ -110,7 +118,7 @@ const AppScreens = () => {
       />
       <AppStackTab.Screen
         name="Games"
-        component={GamesScreens}
+        children={GamesScreens}
         options={{
           tabBarIcon: ({focused}) => {
             let tintColor = '#fff';
@@ -126,6 +134,28 @@ export const RootNavigatorPrivate = () => {
   return (
     <NavigationContainer>
       <AppScreens />
+    </NavigationContainer>
+  );
+};
+
+const AppV2 = createStackNavigator();
+export const RootNavigator = () => {
+  return (
+    <NavigationContainer>
+      <AppV2.Navigator>
+        <AppV2.Screen
+          name="Auth"
+          children={AuthScreens}
+          options={{
+            headerShown: false,
+            headerStyle: {
+              backgroundColor: '#001338',
+            },
+            headerLeft: null,
+          }}
+        />
+        <AppV2.Screen name="App" children={AppScreens} options={headerConf} />
+      </AppV2.Navigator>
     </NavigationContainer>
   );
 };

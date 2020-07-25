@@ -23,8 +23,12 @@ class AuthComponent extends Component {
   };
 
   goNext = () => {
-    // this.props.navigation.navigate('App');
+    this.props.navigation.navigate('App');
     // this.props.navigation.navigate('AppScreens', {screen: 'News'});
+  };
+
+  goGames = () => {
+    this.props.navigation.navigate('Games');
   };
 
   componentDidMount() {
@@ -57,7 +61,7 @@ class AuthComponent extends Component {
         <ScrollView style={styles.container}>
           <View>
             <AuthLogo />
-            <AuthForm goNext={this.goNext} />
+            <AuthForm goNext={this.goNext} goGames={this.goGames} />
           </View>
         </ScrollView>
       );

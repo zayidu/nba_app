@@ -76,7 +76,7 @@ class GamesArticleComponent extends Component {
               </Text>
               <Button
                 title="Login / Register"
-                // onPress={() => this.props.navigation.navigate('Auth')}
+                onPress={() => this.props.navigation.navigate('Auth')}
               />
             </View>
           )}
