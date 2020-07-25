@@ -32,6 +32,7 @@ class GamesArticleComponent extends Component {
     const User = this.props.User;
 
     getTokens(value => {
+      // debugger;
       if (value[0][1] === null) {
         this.manageState(false, false);
       } else {

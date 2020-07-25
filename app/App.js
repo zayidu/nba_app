@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, AsyncStorage, ActivityIndicator} from 'react-native';
 // import AsyncStorage from '@react-native-community/async-storage';
-
+// clear Storage in Console : $reactNative.AsyncStorage.clear()
 import {getTokens, setTokens} from './utils/misc';
 
 // Redux
@@ -43,17 +43,23 @@ class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     let User = nextProps.User.auth;
-    console.log(User);
+    // console.log(User);
     if (User) {
       this.setState({
         loading: false,
         token: this.props.User.token,
         User: this.props.User,
       });
+
+      setTokens(User, () => {
+        this.setState({loading: false});
+      });
     }
   }
 
   render() {
+    // console.log(this.state);
+
     if (this.state.loading) {
       return (
         <View style={styles.loading}>

@@ -9,7 +9,7 @@ export function getNews() {
     url: `${FIREBASE_URL}/news.json`,
   })
     .then(response => {
-      console.log(response);
+      // console.log(response);
       const articles = [];
 
       for (let key in response.data) {

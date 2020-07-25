@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  console.log(state);
+  // console.log(state);
   return {
     News: state.News,
   };
